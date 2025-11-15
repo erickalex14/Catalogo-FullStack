@@ -10,14 +10,16 @@ exports.ProductsModule = void 0;
 const common_1 = require("@nestjs/common");
 const products_controller_1 = require("./controllers/products.controller");
 const products_service_1 = require("./services/products.service");
-const in_memory_product_repository_1 = require("./repositories/in-memory-product.repository");
+const prisma_module_1 = require("../prisma/prisma.module");
+const prisma_product_repository_1 = require("./repositories/prisma-product.repository");
 let ProductsModule = class ProductsModule {
 };
 exports.ProductsModule = ProductsModule;
 exports.ProductsModule = ProductsModule = __decorate([
     (0, common_1.Module)({
+        imports: [prisma_module_1.PrismaModule],
         controllers: [products_controller_1.ProductsController],
-        providers: [products_service_1.ProductsService, { provide: 'ProductRepository', useClass: in_memory_product_repository_1.InMemoryProductRepository }],
+        providers: [products_service_1.ProductsService, { provide: 'ProductRepository', useClass: prisma_product_repository_1.PrismaProductRepository }],
         exports: [products_service_1.ProductsService],
     })
 ], ProductsModule);

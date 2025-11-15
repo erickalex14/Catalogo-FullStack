@@ -10,14 +10,16 @@ exports.CombosModule = void 0;
 const common_1 = require("@nestjs/common");
 const combos_controller_1 = require("./controllers/combos.controller");
 const combos_service_1 = require("./services/combos.service");
-const in_memory_combo_repository_1 = require("./repositories/in-memory-combo.repository");
+const prisma_module_1 = require("../prisma/prisma.module");
+const prisma_combo_repository_1 = require("./repositories/prisma-combo.repository");
 let CombosModule = class CombosModule {
 };
 exports.CombosModule = CombosModule;
 exports.CombosModule = CombosModule = __decorate([
     (0, common_1.Module)({
+        imports: [prisma_module_1.PrismaModule],
         controllers: [combos_controller_1.CombosController],
-        providers: [combos_service_1.CombosService, { provide: 'ComboRepository', useClass: in_memory_combo_repository_1.InMemoryComboRepository }],
+        providers: [combos_service_1.CombosService, { provide: 'ComboRepository', useClass: prisma_combo_repository_1.PrismaComboRepository }],
         exports: [combos_service_1.CombosService],
     })
 ], CombosModule);

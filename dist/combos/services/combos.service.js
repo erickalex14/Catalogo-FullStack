@@ -20,6 +20,9 @@ let CombosService = class CombosService {
     }
     async findAll() { return this.repo.findAll(); }
     async findById(id) { return this.repo.findById(id); }
+    async create(dto) { return this.repo.create({ productId: dto.productId, discountId: dto.discountId ?? null, nombre: dto.nombre }); }
+    async update(id, dto) { return this.repo.update(id, { productId: dto.productId, discountId: dto.discountId ?? null, nombre: dto.nombre }); }
+    async delete(id) { return this.repo.delete(id); }
 };
 exports.CombosService = CombosService;
 exports.CombosService = CombosService = __decorate([

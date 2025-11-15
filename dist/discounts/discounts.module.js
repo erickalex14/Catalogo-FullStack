@@ -10,14 +10,16 @@ exports.DiscountsModule = void 0;
 const common_1 = require("@nestjs/common");
 const discounts_controller_1 = require("./controllers/discounts.controller");
 const discounts_service_1 = require("./services/discounts.service");
-const in_memory_discount_repository_1 = require("./repositories/in-memory-discount.repository");
+const prisma_module_1 = require("../prisma/prisma.module");
+const prisma_discount_repository_1 = require("./repositories/prisma-discount.repository");
 let DiscountsModule = class DiscountsModule {
 };
 exports.DiscountsModule = DiscountsModule;
 exports.DiscountsModule = DiscountsModule = __decorate([
     (0, common_1.Module)({
+        imports: [prisma_module_1.PrismaModule],
         controllers: [discounts_controller_1.DiscountsController],
-        providers: [discounts_service_1.DiscountsService, { provide: 'DiscountRepository', useClass: in_memory_discount_repository_1.InMemoryDiscountRepository }],
+        providers: [discounts_service_1.DiscountsService, { provide: 'DiscountRepository', useClass: prisma_discount_repository_1.PrismaDiscountRepository }],
         exports: [discounts_service_1.DiscountsService],
     })
 ], DiscountsModule);

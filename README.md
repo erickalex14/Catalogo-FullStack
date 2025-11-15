@@ -25,7 +25,7 @@ Cada dominio expone:
 
 ## Próximos pasos sugeridos
 1. Instalar dependencias e inicializar Prisma.
-2. Ajustar tipos (precio Decimal, validaciones con `class-validator`).
+2. Ajustar tipos (precio Decimal, validaciones con `class-validator`), 
 3. Implementar repositorios Prisma (reemplazar InMemory).
 4. Añadir autenticación (JWT) para usuarios.
 5. Añadir casos de uso (crear producto, aplicar descuento, listar combos, etc.).

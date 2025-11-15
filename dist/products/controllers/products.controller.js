@@ -15,12 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("../services/products.service");
+const create_product_request_1 = require("../dto/create-product.request");
+const update_product_request_1 = require("../dto/update-product.request");
 let ProductsController = class ProductsController {
     constructor(service) {
         this.service = service;
     }
     async list() { return this.service.findAll(); }
     async get(id) { return this.service.findById(Number(id)); }
+    async create(dto) { return this.service.create(dto); }
+    async update(id, dto) { return this.service.update(Number(id), dto); }
+    async remove(id) { await this.service.delete(Number(id)); return { success: true }; }
 };
 exports.ProductsController = ProductsController;
 __decorate([
@@ -36,6 +41,28 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "get", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_product_request_1.CreateProductRequest]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, update_product_request_1.UpdateProductRequest]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "remove", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])

@@ -20,6 +20,9 @@ let ProductTypesService = class ProductTypesService {
     }
     async findAll() { return this.repo.findAll(); }
     async findById(id) { return this.repo.findById(id); }
+    async create(dto) { return this.repo.create({ name: dto.name, description: dto.description ?? null }); }
+    async update(id, dto) { return this.repo.update(id, { name: dto.name, description: dto.description ?? null }); }
+    async delete(id) { return this.repo.delete(id); }
 };
 exports.ProductTypesService = ProductTypesService;
 exports.ProductTypesService = ProductTypesService = __decorate([

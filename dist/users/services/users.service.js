@@ -24,6 +24,15 @@ let UsersService = class UsersService {
     async findById(id) {
         return this.userRepository.findById(id);
     }
+    async create(payload) {
+        return this.userRepository.create({ email: payload.email, password: payload.password, name: payload.name ?? null });
+    }
+    async update(id, payload) {
+        return this.userRepository.update(id, { password: payload.password, name: payload.name ?? null });
+    }
+    async delete(id) {
+        return this.userRepository.delete(id);
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

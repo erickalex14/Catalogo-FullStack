@@ -14,12 +14,24 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
 const common_1 = require("@nestjs/common");
+const client_1 = require("@prisma/client");
 let ProductsService = class ProductsService {
     constructor(repo) {
         this.repo = repo;
     }
     async findAll() { return this.repo.findAll(); }
     async findById(id) { return this.repo.findById(id); }
+    async create(dto) {
+        const image = Buffer.from(dto.imageBase64, 'base64');
+        const price = dto.price !== undefined ? new client_1.Prisma.Decimal(dto.price) : null;
+        return this.repo.create({ productTypeId: dto.productTypeId, discountId: dto.discountId ?? null, name: dto.name, price, description: dto.description ?? null, image });
+    }
+    async update(id, dto) {
+        const image = dto.imageBase64 ? Buffer.from(dto.imageBase64, 'base64') : undefined;
+        const price = dto.price !== undefined ? new client_1.Prisma.Decimal(dto.price) : undefined;
+        return this.repo.update(id, { productTypeId: dto.productTypeId, discountId: dto.discountId ?? null, name: dto.name, price: price, description: dto.description ?? null, image });
+    }
+    async delete(id) { return this.repo.delete(id); }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([

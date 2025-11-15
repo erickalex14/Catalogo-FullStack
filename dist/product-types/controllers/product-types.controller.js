@@ -15,12 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductTypesController = void 0;
 const common_1 = require("@nestjs/common");
 const product_types_service_1 = require("../services/product-types.service");
+const create_product_type_request_1 = require("../dto/create-product-type.request");
+const update_product_type_request_1 = require("../dto/update-product-type.request");
 let ProductTypesController = class ProductTypesController {
     constructor(service) {
         this.service = service;
     }
     async list() { return this.service.findAll(); }
     async get(id) { return this.service.findById(Number(id)); }
+    async create(dto) { return this.service.create(dto); }
+    async update(id, dto) { return this.service.update(Number(id), dto); }
+    async remove(id) { await this.service.delete(Number(id)); return { success: true }; }
 };
 exports.ProductTypesController = ProductTypesController;
 __decorate([
@@ -36,6 +41,28 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProductTypesController.prototype, "get", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_product_type_request_1.CreateProductTypeRequest]),
+    __metadata("design:returntype", Promise)
+], ProductTypesController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, update_product_type_request_1.UpdateProductTypeRequest]),
+    __metadata("design:returntype", Promise)
+], ProductTypesController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductTypesController.prototype, "remove", null);
 exports.ProductTypesController = ProductTypesController = __decorate([
     (0, common_1.Controller)('product-types'),
     __metadata("design:paramtypes", [product_types_service_1.ProductTypesService])

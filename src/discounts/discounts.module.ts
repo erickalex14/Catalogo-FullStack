@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { DiscountsController } from './controllers/discounts.controller';
 import { DiscountsService } from './services/discounts.service';
-import { InMemoryDiscountRepository } from './repositories/in-memory-discount.repository';
+import { PrismaModule } from '../prisma/prisma.module';
+import { PrismaDiscountRepository } from './repositories/prisma-discount.repository';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [DiscountsController],
-  providers: [DiscountsService, { provide: 'DiscountRepository', useClass: InMemoryDiscountRepository }],
+  providers: [DiscountsService, { provide: 'DiscountRepository', useClass: PrismaDiscountRepository }],
   exports: [DiscountsService],
 })
 export class DiscountsModule {}

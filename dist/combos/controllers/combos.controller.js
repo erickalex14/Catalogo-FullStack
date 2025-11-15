@@ -15,12 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CombosController = void 0;
 const common_1 = require("@nestjs/common");
 const combos_service_1 = require("../services/combos.service");
+const create_combo_request_1 = require("../dto/create-combo.request");
+const update_combo_request_1 = require("../dto/update-combo.request");
 let CombosController = class CombosController {
     constructor(service) {
         this.service = service;
     }
     async list() { return this.service.findAll(); }
     async get(id) { return this.service.findById(Number(id)); }
+    async create(dto) { return this.service.create(dto); }
+    async update(id, dto) { return this.service.update(Number(id), dto); }
+    async remove(id) { await this.service.delete(Number(id)); return { success: true }; }
 };
 exports.CombosController = CombosController;
 __decorate([
@@ -36,6 +41,28 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CombosController.prototype, "get", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_combo_request_1.CreateComboRequest]),
+    __metadata("design:returntype", Promise)
+], CombosController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, update_combo_request_1.UpdateComboRequest]),
+    __metadata("design:returntype", Promise)
+], CombosController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CombosController.prototype, "remove", null);
 exports.CombosController = CombosController = __decorate([
     (0, common_1.Controller)('combos'),
     __metadata("design:paramtypes", [combos_service_1.CombosService])

@@ -20,6 +20,9 @@ let DiscountsService = class DiscountsService {
     }
     async findAll() { return this.repo.findAll(); }
     async findById(id) { return this.repo.findById(id); }
+    async create(dto) { return this.repo.create({ porcentaje: dto.porcentaje }); }
+    async update(id, dto) { return this.repo.update(id, { porcentaje: dto.porcentaje }); }
+    async delete(id) { return this.repo.delete(id); }
 };
 exports.DiscountsService = DiscountsService;
 exports.DiscountsService = DiscountsService = __decorate([
