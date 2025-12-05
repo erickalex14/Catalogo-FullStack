@@ -6,6 +6,7 @@ export declare class PrismaUserRepository implements UserRepositoryContract {
     constructor(prisma: PrismaService);
     findAll(): Promise<User[]>;
     findById(id: number): Promise<User | null>;
+    findByEmail(email: string): Promise<User | null>;
     create(data: {
         email: string;
         password: string;

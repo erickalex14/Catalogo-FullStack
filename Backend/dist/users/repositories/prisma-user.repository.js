@@ -24,6 +24,10 @@ let PrismaUserRepository = class PrismaUserRepository {
         const row = await this.prisma.user.findUnique({ where: { id } });
         return row ?? null;
     }
+    async findByEmail(email) {
+        const row = await this.prisma.user.findUnique({ where: { email } });
+        return row ?? null;
+    }
     async create(data) {
         const u = await this.prisma.user.create({ data });
         return u;
