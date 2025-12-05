@@ -2,7 +2,6 @@
   "name": "catalogo-backend",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "description": "Backend Nest.js con Prisma ORM para gestion de catálogo",
   "scripts": {
     "start": "nest start",
