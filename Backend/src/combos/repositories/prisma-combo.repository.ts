@@ -12,8 +12,11 @@ export class PrismaComboRepository implements ComboRepositoryContract {
     return rows as unknown as Combo[];
   }
 
+  //Obtener un combo por su ID
   async findById(id: number): Promise<Combo | null> {
+    //Selecciona una fila de la tabla "combo" donde el ID coincide con el proporcionado
     const row = await this.prisma.combo.findUnique({ where: { id } });
+    //retorna la fila convertida a la entidad Combo o null si no se encuentra
     return (row as unknown as Combo) ?? null;
   }
 

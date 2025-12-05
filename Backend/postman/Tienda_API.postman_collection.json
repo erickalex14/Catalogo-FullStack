@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "tienda-api-collection",
     "name": "Tienda API - Catálogo Backend",
-    "description": "Colección de endpoints para probar la API del catálogo de tienda.\n\nBase URL: http://localhost:3000/api\n\nMódulos:\n- Users: Gestión de usuarios\n- Products: Catálogo de productos\n- Product Types: Categorías de productos\n- Combos: Combos de productos\n- Discounts: Descuentos y promociones",
+    "description": "Colección de endpoints para probar la API del catálogo de tienda.\n\nBase URL: http://localhost:3000/api\n\nMódulos:\n- Auth: Autenticación JWT\n- Users: Gestión de usuarios\n- Products: Catálogo de productos\n- Product Types: Categorías de productos\n- Combos: Combos de productos\n- Discounts: Descuentos y promociones",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -10,9 +10,107 @@
       "key": "baseUrl",
       "value": "http://localhost:3000/api",
       "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
     }
   ],
   "item": [
+    {
+      "name": "Auth",
+      "description": "Endpoints de autenticación",
+      "item": [
+        {
+          "name": "Registrar usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.accessToken) {",
+                  "    pm.collectionVariables.set('accessToken', jsonData.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nuevo@ejemplo.com\",\n  \"password\": \"password123\",\n  \"name\": \"Usuario Nuevo\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Iniciar sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.accessToken) {",
+                  "    pm.collectionVariables.set('accessToken', jsonData.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nuevo@ejemplo.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Obtener perfil (protegido)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        }
+      ]
+    },
     {
       "name": "Users",
       "description": "Endpoints para gestión de usuarios",

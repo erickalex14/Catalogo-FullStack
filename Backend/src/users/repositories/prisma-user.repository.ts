@@ -17,6 +17,11 @@ export class PrismaUserRepository implements UserRepositoryContract {
     return (row as unknown as User) ?? null;
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    const row = await this.prisma.user.findUnique({ where: { email } });
+    return (row as unknown as User) ?? null;
+  }
+
   async create(data: { email: string; password: string; name?: string | null }): Promise<User> {
     const u = await this.prisma.user.create({ data });
     return u as unknown as User;

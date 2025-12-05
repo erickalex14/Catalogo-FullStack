@@ -7,6 +7,7 @@
  * Módulos incluidos:
  * - ConfigModule: Configuración global (.env)
  * - PrismaModule: Conexión a base de datos PostgreSQL
+ * - AuthModule: Autenticación JWT (/api/auth)
  * - UsersModule: Gestión de usuarios (/api/users)
  * - ProductTypesModule: Tipos de productos (/api/product-types)
  * - DiscountsModule: Descuentos y promociones (/api/discounts)
@@ -16,6 +17,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProductTypesModule } from './product-types/product-types.module';
 import { DiscountsModule } from './discounts/discounts.module';
@@ -29,6 +31,9 @@ import { CombosModule } from './combos/combos.module';
     
     // Módulo de base de datos (Prisma ORM)
     PrismaModule,
+    
+    // Módulo de autenticación
+    AuthModule,         // Autenticación JWT
     
     // Módulos de funcionalidad
     UsersModule,        // Gestión de usuarios
