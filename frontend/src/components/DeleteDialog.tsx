@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from './alert-dialog';
+} from './ui/alert-dialog';
 
 interface DeleteDialogProps {
   open: boolean;

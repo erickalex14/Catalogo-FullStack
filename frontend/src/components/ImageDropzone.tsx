@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Upload, X } from 'lucide-react';
-import { Button } from './button';
+import { Button } from './ui/button';
 
 interface ImageDropzoneProps {
   value?: string;
