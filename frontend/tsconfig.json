@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/pages/UsersPage", "src/pages/RegisterPage"  ],
   "exclude": ["node_modules"]
 }
