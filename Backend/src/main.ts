@@ -26,7 +26,13 @@ async function bootstrap() {
   
   // Obtener configuración del servicio
   const config = app.get(ConfigService);
-  const port = config.get<number>('PORT') || 3000;
+  const port = config.get<number>('PORT') || 4000;
+
+  // Habilitar CORS para permitir solicitudes desde el frontend en localhost:3000
+  app.enableCors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  });
   
   // Configurar prefijo global para todas las rutas API
   app.setGlobalPrefix('api');

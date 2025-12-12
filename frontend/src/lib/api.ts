@@ -1,9 +1,9 @@
 /**
  * Configuración del cliente API para conectar con el Backend NestJS
- * Base URL: http://localhost:3000/api
+ * Base URL: http://localhost:4000/api
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
 /**
  * Error personalizado de la API

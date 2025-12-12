@@ -12,6 +12,10 @@ export class InMemoryUserRepository implements UserRepositoryContract {
     return this.items.find(u => u.id === id) || null;
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    return this.items.find(u => u.email === email) || null;
+  }
+
   async create(data: { email: string; password: string; name?: string | null }): Promise<User> {
     const last = this.items.length ? this.items[this.items.length - 1] : undefined;
     const nextId = ((last?.id) ?? 0) + 1;

@@ -11,6 +11,9 @@ class InMemoryUserRepository {
     async findById(id) {
         return this.items.find(u => u.id === id) || null;
     }
+    async findByEmail(email) {
+        return this.items.find(u => u.email === email) || null;
+    }
     async create(data) {
         const last = this.items.length ? this.items[this.items.length - 1] : undefined;
         const nextId = ((last?.id) ?? 0) + 1;
